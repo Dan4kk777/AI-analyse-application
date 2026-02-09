@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список курсов</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Список курсов</h1>
+    <ul>
+        <% courses.forEach(course => { %>
+            <li><a href="/faculties/groups?facultyId=<%= facultyId %>&courseId=<%= course.id %>"><%= course.name %></a></li>
+        <% }); %>
+    </ul>
+    <a href="/faculties">Назад к списку факультетов</a>
+</body>
+</html>

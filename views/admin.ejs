@@ -1,0 +1,134 @@
+<!-- <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Admin - Список сотрудников</title>
+</head>
+<body>
+    <h1>Список сотрудников</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Должность</th>
+                <th>Пол</th>
+                <th>Отдел</th>
+                <th>Email</th>
+                <th>Телефон</th>                
+                <th>Комментарий</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% employees.forEach(employee => { %>
+                <tr>
+                    <td><%= employee.name %></td>
+                    <td><%= employee.position %></td>
+                    <td><%= employee.gender %></td>
+                    <td><%= employee.department %></td>
+                    <td><%= employee.email %></td>
+                    <td><%= employee.phone_number %></td>       
+                    <td><%= employee.comment %></td>
+                    <td>
+                        <form action="/admin/delete/<%= employee.id %>" method="POST" style="display:inline;">
+                            <button type="submit">Удалить</button>
+                        </form>
+                        <button style="display: block;">
+                            <a href="/admin/edit/<%= employee.id %>" style="color: black;">Изменить</a>
+                        </button>    
+                    </td>
+                </tr>
+            <% }) %>
+
+        </tbody>
+        
+    </table>
+    <a href="/save_form">Добавить сотрудника</a>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Admin - Список сотрудников</title>
+    <style>
+        .employee-list {
+            max-height: 200px;
+            overflow-y: scroll;
+            width: 50%;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        button {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Список сотрудников</h1>
+    
+    <div style="display: flex; flex-direction: row;">
+        <select id="employeeSelect" class="employee-list" size="10">
+            <% employees.forEach(employee => { %>
+                <option value="<%= employee.id %>">
+                    <%= employee.name %>
+                </option>
+            <% }) %>
+        </select>
+        
+        
+        <div class="button-container" style="display: flex; flex-direction: column;">
+            <button id="editButton" style="margin: 20px;">Изменить</button>
+            <button id="deleteButton" style="margin: 20px;">Удалить</button>
+            <button style="margin: 20px;"><a href="/save_form" style="color: black;">Добавить сотрудника</a></button>
+        </div>
+    </div>
+    
+    
+
+    <script>
+        // Получение кнопок и списка сотрудников
+        const editButton = document.getElementById('editButton');
+        const deleteButton = document.getElementById('deleteButton');
+        const employeeSelect = document.getElementById('employeeSelect');
+
+        // Обработчик для кнопки изменения
+        editButton.addEventListener('click', () => {
+            const selectedEmployeeId = employeeSelect.value;
+            if (selectedEmployeeId) {
+                window.location.href = `/admin/edit?employeeId=${selectedEmployeeId}`;
+            } else {
+                alert('Пожалуйста, выберите сотрудника для изменения');
+            }
+        });
+
+        // Обработчик для кнопки удаления
+        deleteButton.addEventListener('click', () => {
+            const selectedEmployeeId = employeeSelect.value;
+            if (selectedEmployeeId) {
+                if (confirm('Вы уверены, что хотите удалить этого сотрудника?')) {
+                    fetch(`/admin/delete?employeeId=${selectedEmployeeId}`, {
+                        method: 'POST'
+                    }).then(response => {
+                        if (response.ok) {
+                            alert('Сотрудник успешно удален');
+                            location.reload(); // Перезагрузить страницу после удаления
+                        } else {
+                            alert('Ошибка при удалении сотрудника');
+                        }
+                    });
+                }
+            } else {
+                alert('Пожалуйста, выберите сотрудника для удаления');
+            }
+        });
+    </script>
+</body>
+</html>

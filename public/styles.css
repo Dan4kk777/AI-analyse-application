@@ -1,0 +1,34 @@
+.input-wrapper {
+    margin-bottom: 10px;
+}
+
+table {
+    border-collapse: collapse; /* Убирает промежутки между границами */
+    width: 100%; /* Заставляет таблицу занимать всю доступную ширину */
+}
+
+table, th, td {
+    border: 1px solid black; /* Устанавливает черные границы для таблицы и ячеек */
+    padding: 8px; /* Добавляет внутренние отступы для содержимого ячеек */
+}
+
+th {
+    background-color: #f2f2f2; /* Задает фоновый цвет для заголовков таблицы */
+}
+
+a {
+    color: blue; /* Цвет ссылки в обычном состоянии */
+    text-decoration: none; /* Убирает подчеркивание у ссылок */
+}
+
+a:visited {
+    color: blue; /* Цвет после посещения */
+}
+
+a:hover {
+    color: darkblue; /* Цвет при наведении */
+}
+
+a:active {
+    color: blue; /* Цвет при нажатии */
+}

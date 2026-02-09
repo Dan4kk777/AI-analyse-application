@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информация о студенте</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h2>Информация о студенте</h2>
+    <div>
+        <p><strong>Форма обучения:</strong> <%= student.edu_form %></p> <!-- ID студента -->
+        <p><strong>Средний балл:</strong> <%= student.average_score %></p> <!-- ID группы -->
+        <p><strong>Номер телефона:</strong> <%= student.phone_number %></p> <!-- Email студента -->
+        
+    </div>
+    <a href="/faculties/students?facultyId=<%= facultyId %>&courseId=<%= courseId %>&groupId=<%= groupId %>">Назад к списку студентов</a>
+</body>
+</html>

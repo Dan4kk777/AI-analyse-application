@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Сохранить данные</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Сохранить данные о сотруднике</h1>
+
+    <!-- Успешное сообщение (будет отображено при необходимости) -->
+    <% if (success) { %>
+        <p style="color: green;">Данные успешно сохранены!</p>
+    <% } %>
+
+    <!-- Ошибка (будет отображено при необходимости) -->
+    <% if (error) { %>
+        <p style="color: red;"><%= error %></p>
+    <% } %>
+
+    <form action="/save_form" method="POST">
+        <div class="input-wrapper">
+            <label>Имя: </label>
+            <input type="text" name="name" required>
+        </div>
+    
+        <div class="input-wrapper">
+            <label>Должность: </label>
+            <select name="position_id" required>
+                <% positions.forEach(position => { %>
+                    <option value="<%= position.id %>"><%= position.name %></option>
+                <% }) %>
+            </select>
+        </div>
+    
+        <div class="input-wrapper">
+            <label>Пол: </label>
+            <label><input type="radio" name="gender" value="W" required>Woman</label>
+            <label><input type="radio" name="gender" value="M">Man</label>
+        </div>
+    
+        <div class="input-wrapper">
+            <label>Отдел: </label>
+            <select name="department_id" required>
+                <% departments.forEach(department => { %>
+                    <option value="<%= department.id %>"><%= department.name %></option>
+                <% }) %>
+            </select>
+        </div>
+    
+        <div class="input-wrapper">
+            <label>Email: </label>
+            <input type="email" name="email" required>
+        </div>
+    
+        <div class="input-wrapper">
+            <label>Телефон: </label>
+            <input type="text" name="phone_number" required>
+        </div>
+    
+        <div class="input-wrapper">
+            <label>Комментарий: </label>
+            <textarea name="comment" required></textarea>
+        </div>
+                      
+        <button type="submit">Добавить</button>
+        <button type="reset">Очистить</button>
+
+        <div>
+            <a href="/admin">К списку сотрудников</a>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактировать сотрудника</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Редактировать сотрудника</h1>
+    <form action="/admin/edit?employeeId=<%= employee.id %>" method="POST">
+        
+        <div class="input-wrapper">
+            <label>Имя: </label>
+            <input type="text" name="name" value="<%= employee.name %>" required>
+        </div>
+    
+        <div class="input-wrapper">
+            <label>Должность: </label>
+            <select name="position_id" required>
+                <% positions.forEach(position => { %>
+                    <option value="<%= position.id %>" <% if (position.id === employee.position_id) { %> selected <% } %>>
+                        <%= position.name %>
+                    </option>
+                <% }) %>
+            </select>
+        </div>
+    
+        <div class="input-wrapper">
+            <label>Пол: </label>
+            <label>
+                <input type="radio" name="gender" value="W" 
+                    <% if (employee.gender === 'W') { %> checked <% } %> required> Woman
+            </label>
+            <label>
+                <input type="radio" name="gender" value="M" 
+                    <% if (employee.gender === 'M') { %> checked <% } %>> Man
+            </label>
+        </div>
+    
+        <div class="input-wrapper">
+            <label>Отдел: </label>
+            <select name="department_id" required>
+                <% departments.forEach(department => { %>
+                    <option value="<%= department.id %>" <% if (department.id === employee.department_id) { %> selected <% } %>>
+                        <%= department.name %>
+                    </option>
+                <% }) %>
+            </select>
+        </div>
+    
+        <div class="input-wrapper">
+            <label>Email: </label>
+            <input type="email" name="email" value="<%= employee.email %>" required>
+        </div>
+    
+        <div class="input-wrapper">
+            <label>Телефон: </label>
+            <input type="text" name="phone_number" value="<%= employee.phone_number %>" required>
+        </div>
+    
+        <div class="input-wrapper">
+            <label>Комментарий: </label>
+            <textarea name="comment"><%= employee.comment %></textarea>
+        </div>
+
+        <button type="submit">Сохранить изменения</button>
+    </form>
+    <a href="/admin">Назад к списку сотрудников</a>
+</body>
+</html>
